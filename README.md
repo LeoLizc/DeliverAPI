@@ -1,9 +1,9 @@
 # backend-first-project
 
-## Project Description
+## :clipboard: Project Description
 The "backend-first-project" repository is the first project of your university's backend course. It is a prototype of a basic CRUD (Create, Read, Update, Delete) service for a delivery service. The project has been developed using backend technologies and aims to provide a basic example of implementing a delivery service with functionalities for data creation, reading, updating, and deletion.
 
-## Installation
+## :wrench: Installation
 To install and set up the project locally, follow these steps:
 
 1. Make sure you have Node.js installed on your system.
@@ -16,7 +16,7 @@ $ git clone https://github.com/LeoLizc/backend-first-project.git
 $ npm install
 ```
 
-## Usage
+## :rocket: Usage
 Once you have installed the project, you can run it locally with the following command:
 ```
 $ npm start
@@ -25,18 +25,20 @@ This will start the server, and you can access the endpoints to test the functio
 
 If you need more information about the endpoints, you can refer to the "Proyecto 1.pdf" file in the root of the repository, which contains the project requirements and details about the required endpoints.
 
-## Contribution
+## :handshake: Contribution
 This project is just the first project of a course, so there is no expectation for continued development once it is completed. However, if you want to contribute improvements or fixes, you can do so through pull requests. Any contribution is appreciated!
 
-## Documentation
+## :books: Documentation
 In addition to the details provided in the "Proyecto 1.pdf" file, there is no additional documentation available at this time.
 
-## License
+## :page_facing_up: License
 This project is distributed under the MIT License. You can refer to the LICENSE file in the root of the repository for more information.
 
-## Contact
+## :email: Contact
 If you have questions, issues, or comments about the project, you can contact me through the following channels:
 
-- GitHub: [Your GitHub Username](https://github.com/your-username)
-- LinkedIn: [https://www.linkedin.com/in/your-linkedin-profile](https://www.linkedin.com/in/your-linkedin-profile)
-- Email: your-email@example.com
+- GitHub: [LeoLizc](https://github.com/LeoLizc)
+- LinkedIn: [https://www.linkedin.com/in/leonardo-lizcano-pinto0220](https://www.linkedin.com/in/leonardo-lizcano-pinto0220)
+- Email:
+  - leolizcanop@gmail.com
+  - ldlizcano@uninorte.edu.co
