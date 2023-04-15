@@ -1,6 +1,7 @@
 {
   "env": {
-    "MONGO_USER": "movillaf",
-    "MONGO_PASS": "f0yHKjVwWn5C6hgJ"
+    "MONGO_USER": "api_user",
+    "MONGO_PASS": "ymv5o8DmogP51FM9",
+    "MONGO_DB": "domicilios"
   }
 }

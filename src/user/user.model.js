@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const empanadaSchema = mongoose.Schema(
   {
@@ -9,4 +9,4 @@ const empanadaSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('empanada', empanadaSchema);
+export default mongoose.model('User', empanadaSchema);
