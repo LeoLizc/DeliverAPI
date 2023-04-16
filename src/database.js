@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { softDeletePlugin } from '../helpers/mongo-plugins';
 
 mongoose
   .connect(
@@ -10,6 +11,7 @@ mongoose
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      dbName: process.env.MONGO_DB || 'test',
     }
   )
   .then(() => {
@@ -19,3 +21,5 @@ mongoose
     console.log('There was an error with connection!');
     console.log(err);
   });
+
+mongoose.plugin(softDeletePlugin);
