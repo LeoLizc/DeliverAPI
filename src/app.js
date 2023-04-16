@@ -16,8 +16,18 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
+// Routes
 import userRoutes from './user/user.routes.js'
 app.use('/user', userRoutes)
+
+import restaurantRoutes from './restaurant/restaurant.routes.js'
+app.use('/restaurant', restaurantRoutes)
+
+import productRoutes from './product/product.routes.js'
+app.use('/product', productRoutes)
+
+import orderRoutes from './order/order.routes.js'
+app.use('/order', orderRoutes)
 
 // Endpoint para 404
 app.use((_req, res) => {
