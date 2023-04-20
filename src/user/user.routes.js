@@ -6,12 +6,19 @@ const router = Router();
 router.get('/', getUsers);
 
 // Endpoint POST /prueba
-router.post('/', createUser);
+router.post('/', createUser);//? SIGN UP?
 
 // Endpoint PATCH /prueba
-router.patch('/', patchUser);
+router.patch('/:id', patchUser);
 
 // Endpoint DELETE /prueba
 router.delete('/:id', deleteUser);
+
+// ? THINK about get the orders of a user
+router.get('/:id/orders', (req, res) => {
+    res.send("Endpoint to get all orders from a user not implemented yet");
+});
+
+// TODO THINK about LOGIN and SIGN UP
 
 export default router;

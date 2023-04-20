@@ -10,14 +10,6 @@ router.get("/", (req, res) => {
   res.send("Endpoint to get all products not implemented yet");
 });
 
-/**
- * Endpoint to create a product in an especific restaurant
- */
-
-router.post("/:id", (req, res) => {
-  res.send("Endpoint to create a product not implemented yet");
-});
-
 router.patch("/:id", (req, res) => {
   res.send("Endpoint to patch a product not implemented yet");
 });

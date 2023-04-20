@@ -1,15 +1,24 @@
 
 import User from './user.model';
 
-export async function getUser(req, res) {
+export async function getUsers(req, res) {
 
-  res.send('Endpoint to get a user not implemented yet');
+  try {
+
+    const users = await User.find();
+    res.status(200).json(users);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 
 }
 
 export async function createUser(req, res) {
   try {
-    res.send('Endpoint to create a user not implemented yet');
+    // console.log(req.body);
+    const user = await User.create(req.body);
+    res.status(201).json(user);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -23,6 +32,21 @@ export async function patchUser(req, res) {
 
 export async function deleteUser(req, res) {
 
-  res.send('Endpoint to delete a user not implemented yet');
+  // res.send('Endpoint to delete a user not implemented yet');
+  try {
+
+    const { id } = req.params;
+    const element = await User.findOne({ _id: id });
+
+    if (!element) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    await element.delete();
+    res.status(200).json({ message: 'User deleted' });
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 
 }
