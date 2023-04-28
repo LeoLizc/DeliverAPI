@@ -18,16 +18,16 @@ app.use(morgan('dev'));
 
 // Routes
 import userRoutes from './user/user.routes.js'
-app.use('/user', userRoutes)
+app.use('/users', userRoutes)
 
 import restaurantRoutes from './restaurant/restaurant.routes.js'
-app.use('/restaurant', restaurantRoutes)
+app.use('/restaurants', restaurantRoutes)
 
 import productRoutes from './product/product.routes.js'
-app.use('/product', productRoutes)
+app.use('/products', productRoutes)
 
 import orderRoutes from './order/order.routes.js'
-app.use('/order', orderRoutes)
+app.use('/orders', orderRoutes)
 
 // Endpoint para 404
 app.use((_req, res) => {
