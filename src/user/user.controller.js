@@ -14,12 +14,46 @@ export async function getUsers(req, res) {
 
 }
 
-export async function createUser(req, res) {
+export async function signup(req, res) {
   try {
     // console.log(req.body);
     const user = await User.create(req.body);
     res.status(201).json(user);
   } catch (err) {
+    console.log('Error creating user, type: ', err.name);
+    // console.error(err);
+    if (err.name === 'ValidationError') {
+      res.status(400).json(err);
+    } else if (err.name === 'MongoError') {
+      res.status(409).json(err);
+    } else {
+      res.status(500).json(err);
+    }
+  }
+}
+
+export async function login(req, res) {
+  try {
+
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
+
+    // Find user
+    const user = await User.findOne({ email });
+
+    // verify user and Compare password
+    if (!user || ! await user.comparePassword(password)) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // return the User
+    res.status(200).json(user);
+
+  } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 }
