@@ -23,12 +23,12 @@ const subProductSchema = new Schema(
 );
 
 const orderStatus = Object.freeze({
-  CREADO: 'Creado',
-  ENVIADO: 'Enviado',
-  ACEPTADO: 'Aceptado',
-  RECIBIDO: 'Recibido',
-  EN_DIRECCION: 'En dirección',
-  REALIZADO: 'Realizado',
+  CREADO: 'creado',
+  ENVIADO: 'enviado',
+  ACEPTADO: 'aceptado',
+  RECIBIDO: 'recibido',
+  EN_DIRECCION: 'en dirección',
+  REALIZADO: 'realizado',
 });
 const OrderSchema = new Schema(
   {

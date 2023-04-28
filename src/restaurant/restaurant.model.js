@@ -6,10 +6,14 @@ import mongoose from "mongoose";
  */
 const RestaurantSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     name: { type: String, required: [true, "Nombra tu restaurante."] },
     category: { type: String, required: [true, "Necesitamos tu categoría."] },
     address: {
+      address: {
+        type: String,
+        required: [true, "Ingresa la dirección de tu restaurante."],
+      },
       latitude: {
         type: Number,
         required: [true, "Ingresa la latitud de tu dirección."],

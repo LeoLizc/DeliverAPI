@@ -16,15 +16,13 @@ const AddressSchema = Schema(
       // ? Should we add a minlength or match to validate the address?
     },
     // the coordinates of the address
-    location: {
-      latitude: {
-        type: Number,
-        required: [true, 'Ingresa la latitud de tu dirección.'],
-      },
-      longitude: {
-        type: Number,
-        required: [true, 'Ingresa la longitud de tu dirección.'],
-      }
+    latitude: {
+      type: Number,
+      required: [true, 'Ingresa la latitud de tu dirección.'],
+    },
+    longitude: {
+      type: Number,
+      required: [true, 'Ingresa la longitud de tu dirección.'],
     }
   },
   { timestamps: true }

@@ -4,19 +4,18 @@ const ProductSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: [true, 'Ingresa el nombre del producto.']
     },
     description: {
       type: String,
-      required: true,
     },
     price: {
       type: Number,
-      required: true,
+      required: [true, 'Ingresa el precio del producto.']
     },
     category: {
       type: String,
-      required: true,
+      required: [true, 'Ingresa la categoría del producto.']
     },
     restaurant: {
       type: mongoose.Schema.Types.ObjectId,
