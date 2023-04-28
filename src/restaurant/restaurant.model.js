@@ -7,12 +7,30 @@ import mongoose from "mongoose";
 const RestaurantSchema = new mongoose.Schema(
   {
     name: { type: String, required: [true, "Nombra tu restaurante."] },
-    address: { type: String, required: [true, "Necesitamos tu dirección."] },
     category: { type: String, required: [true, "Necesitamos tu categoría."] },
+    address: {
+      latitude: {
+        type: Number,
+        required: [true, "Ingresa la latitud de tu dirección."],
+      },
+      longitude: {
+        type: Number,
+        required: [true, "Ingresa la longitud de tu dirección."],
+      },
+    },
   },
   {
     timestamps: true,
+    virtuals: {
+      products: {
+        ref: "Product",
+        localField: "_id",
+        foreignField: "restaurant",
+        justOne: false,
+      },
+    },
   }
 );
 
 export const Restaurant = mongoose.model("Restaurant", RestaurantSchema);
+export default Restaurant;

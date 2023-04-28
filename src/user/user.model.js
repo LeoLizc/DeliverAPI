@@ -1,10 +1,41 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
 
-const UserSchema = mongoose.Schema(
+export const roles = Object.freeze({
+  CLIENTE: 'cliente',
+  DOMICILIARIO: 'domiciliario',
+  ADMINISTRADOR: 'administrador de restaurante'
+})
+
+const AddressSchema = Schema(
   {
     // campos
-    name: { type: String, required: [true, 'Nombra tu empanada.'] },
+    address: {
+      type: String,
+      required: [true, 'Ingresa tu dirección.'],
+      // ? Should we add a minlength or match to validate the address?
+    },
+    // the coordinates of the address
+    location: {
+      latitude: {
+        type: Number,
+        required: [true, 'Ingresa la latitud de tu dirección.'],
+      },
+      longitude: {
+        type: Number,
+        required: [true, 'Ingresa la longitud de tu dirección.'],
+      }
+    }
+  },
+  { timestamps: true }
+);
+
+export const Address = model('Address', AddressSchema);
+
+const UserSchema = Schema(
+  {
+    // campos
+    name: { type: String, required: [true, 'El nombre es requerido'] },
     email: {
       type: String,
       required: [true, 'Ingresa tu email.'],
@@ -22,20 +53,22 @@ const UserSchema = mongoose.Schema(
       required: [true, 'Ingresa tu número de teléfono.'],
       minlength: [10, 'El número de teléfono debe tener al menos 10 caracteres.']
     },
-    address: {
-      type: String,
-      required: [true, 'Ingresa tu dirección.'],
-      // ? Should we add a minlength or match to validate the address?
-    },
     // * Roles: "cliente", "domiciliario", "administrador de restaurante"
     role: {
       type: String,
-      enum: ['cliente', 'domiciliario', 'administrador de restaurante'],
-      default: 'cliente'
+      enum: Object.values(roles),
+      default: roles.CLIENTE
     },
   },
   { timestamps: true }
 );
+
+UserSchema.virtual('addresses', {
+  ref: 'Address',
+  localField: '_id',
+  foreignField: 'user',
+  justOne: false,
+});
 
 /**
  * @description - Remove password from user object
@@ -75,5 +108,19 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
+/**
+ * @description - overwrite create method to accept address
+ */
+UserSchema.statics.create = async function (data) {
+  const { address, ...rest } = data;
+  const user = new this(rest);
+  if (address) {
+    const newAddress = new Address({ ...address, user: user._id });
+    await newAddress.save();
+  }
+  await user.save();
+  return user;
+};
 
-export default mongoose.model('User', UserSchema);
+export const User = model('User', UserSchema);
+export default User;

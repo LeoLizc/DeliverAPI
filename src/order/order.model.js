@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const subProductSchema = new mongoose.Schema(
+const subProductSchema = new Schema(
   {
     productId: {// The id of the product
       type: mongoose.Schema.Types.ObjectId,
@@ -15,24 +15,24 @@ const subProductSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    price: { // The price of the product
+    price: { // The subtotal of the product
       type: Number,
       required: true,
     },
   },
 );
 
-const orderStatus = [
-  'Creado',
-  'Enviado',
-  'Aceptado',
-  'Recibido',
-  'En dirección',
-  'Realizado',
-]
-const OrderSchema = new mongoose.Schema(
+const orderStatus = Object.freeze({
+  CREADO: 'Creado',
+  ENVIADO: 'Enviado',
+  ACEPTADO: 'Aceptado',
+  RECIBIDO: 'Recibido',
+  EN_DIRECCION: 'En dirección',
+  REALIZADO: 'Realizado',
+});
+const OrderSchema = new Schema(
   {
-    user: {
+    client: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -47,12 +47,37 @@ const OrderSchema = new mongoose.Schema(
     ],
     status: {
       type: String,
-      enum: orderStatus,
-      default: "pending",
+      enum: Object.values(orderStatus),
+      default: orderStatus.CREADO,
     },
     deliveryPerson: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    deliveryAddress: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Address",
+      required: true,
+    },
+    restaurantLocation: {
+      latitude: {
+        type: Number,
+        required: [true, 'Ingresa la latitud de tu dirección.'],
+      },
+      longitude: {
+        type: Number,
+        required: [true, 'Ingresa la longitud de tu dirección.'],
+      }
+    },
+    deliveryLocation: {
+      latitude: {
+        type: Number,
+        required: [true, 'Ingresa la latitud de tu dirección.'],
+      },
+      longitude: {
+        type: Number,
+        required: [true, 'Ingresa la longitud de tu dirección.'],
+      }
     },
   },
   {
@@ -69,4 +94,5 @@ const OrderSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Order", OrderSchema);
+export const Order = model("Order", OrderSchema);
+export default Order;
