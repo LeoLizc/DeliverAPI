@@ -1,21 +1,20 @@
 import { Router } from "express";
+import {
+  createProduct,
+  getProduct,
+  updateProduct,
+  updateManyProduct,
+  deleteProduct,
+  getManyProduct,
+} from "./product.controller";
 
 const router = Router();
 
-router.get("/:id", (req, res) => {
-  res.send("Endpoint to get a product not implemented yet");
-});
-
-router.get("/", (req, res) => {
-  res.send("Endpoint to get all products not implemented yet");
-});
-
-router.patch("/:id", (req, res) => {
-  res.send("Endpoint to patch a product not implemented yet");
-});
-
-router.delete("/:id", (req, res) => {
-  res.send("Endpoint to delete a product not implemented yet");
-});
+router.post("/", createProduct);
+router.get("/:id", getProduct);
+router.patch("/:id", updateProduct);
+router.patch("/", updateManyProduct);
+router.delete("/:id", deleteProduct);
+router.get("/", getManyProduct);
 
 export default router;

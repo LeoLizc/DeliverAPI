@@ -1,4 +1,4 @@
-import { signup, login, deleteUser, getUsers, patchUser } from "./user.controller";
+import { signup, login, deleteUser, getUsers, patchUser, getAddresses } from "./user.controller";
 import { Router } from 'express';
 const router = Router();
 
@@ -21,5 +21,6 @@ router.get('/:id/orders', (req, res) => {
 
 // TODO THINK about LOGIN and SIGN UP
 router.post('/login', login);
+router.get('/:id/addresses', getAddresses);
 
 export default router;

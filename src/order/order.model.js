@@ -19,10 +19,12 @@ const subProductSchema = new Schema(
       type: Number,
       required: true,
     },
-  },
+  }, {
+  _id: false, // This is to avoid the creation of the _id field (which is not needed in this case)
+}
 );
 
-const orderStatus = Object.freeze({
+export const orderStatus = Object.freeze({
   CREADO: 'creado',
   ENVIADO: 'enviado',
   ACEPTADO: 'aceptado',
@@ -30,6 +32,15 @@ const orderStatus = Object.freeze({
   EN_DIRECCION: 'en dirección',
   REALIZADO: 'realizado',
 });
+
+export const orderStatusChange = Object.freeze({
+  [orderStatus.CREADO]: orderStatus.ENVIADO,
+  [orderStatus.ENVIADO]: orderStatus.ACEPTADO,
+  [orderStatus.ACEPTADO]: orderStatus.RECIBIDO,
+  [orderStatus.RECIBIDO]: orderStatus.EN_DIRECCION,
+  [orderStatus.EN_DIRECCION]: orderStatus.REALIZADO,
+});
+
 const OrderSchema = new Schema(
   {
     client: {
