@@ -9,6 +9,11 @@ export const roles = Object.freeze({
 
 const AddressSchema = Schema(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: [true, 'El usuario es requerido.'],
+    },
     // campos
     address: {
       type: String,

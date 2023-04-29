@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Order from "../order/order.model";
 
 /**
  * @description - Restaurant Schema
@@ -33,6 +34,11 @@ const RestaurantSchema = new mongoose.Schema(
         foreignField: "restaurant",
         justOne: false,
       },
+      orders: {
+        get() {
+          return Order.find({ restaurant: this._id });
+        }
+      }
     },
   }
 );
