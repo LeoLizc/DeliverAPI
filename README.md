@@ -1,7 +1,7 @@
 # backend-first-project
 
 ## :clipboard: Project Description
-The "backend-first-project" repository is the first project of your university's backend course. It is a prototype of a basic CRUD (Create, Read, Update, Delete) service for a delivery service. The project has been developed using backend technologies and aims to provide a basic example of implementing a delivery service with functionalities for data creation, reading, updating, and deletion.
+The "DeliverAPI" repository is the first project of your university's backend course. It is a prototype of a basic CRUD (Create, Read, Update, Delete) service for a delivery service. The project has been developed using backend technologies and aims to provide a basic example of implementing a delivery service with functionalities for data creation, reading, updating, and deletion.
 
 Also, for this project I'm experimenting with different techniques, mainly Mongoose and a folder organization that I'm not used to.
 Among other things you can see:
@@ -16,7 +16,7 @@ To install and set up the project locally, follow these steps:
 1. Make sure you have Node.js installed on your system.
 2. Clone this repository to your local machine using the following command:
 ```
-$ git clone https://github.com/LeoLizc/backend-first-project.git
+$ git clone https://github.com/LeoLizc/DeliverAPI.git
 ```
 3. In the root of the project, run the following command to install all the dependencies:
 ```
