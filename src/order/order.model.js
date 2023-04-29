@@ -59,6 +59,11 @@ const OrderSchema = new Schema(
       ref: "Address",
       required: true,
     },
+    restaurantAddress: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Address",
+      required: true,
+    },
     restaurantLocation: {
       latitude: {
         type: Number,
