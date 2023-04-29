@@ -60,7 +60,7 @@ const OrderSchema = new Schema(
       required: true,
     },
     restaurantAddress: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: "Address",
       required: true,
     },
