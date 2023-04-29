@@ -1,7 +1,7 @@
 {
-  "name": "node-test",
+  "name": "deliver-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "first backend project",
   "main": "index.js",
   "scripts": {
     "start:dev": "nodemon --exec babel-node index",
