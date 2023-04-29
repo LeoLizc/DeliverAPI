@@ -194,3 +194,26 @@ export async function getSentOrders(req, res) {
     res.status(500).json(err);
   }
 }
+
+export async function deleteOrder(req, res) {
+  const { id } = req.params;
+
+  try {
+    const order = await Order.findById(id);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    // if (order.status !== orderStatus.CREADO) {
+    //   return res.status(400).json({ message: 'Order already sent' });
+    // }
+
+    await order.delete();
+
+    res.status(200).json({ message: 'Order deleted' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+}

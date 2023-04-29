@@ -6,6 +6,7 @@ import {
   updateOrderStatus,
   getOrder,
   getSentOrders,
+  deleteOrder,
 } from "./order.controller";
 
 const router = Router();
@@ -17,8 +18,6 @@ router.get("/:id", getOrder);
 router.patch("/:id", updateOrder);
 router.patch("/:id/status", updateOrderStatus);
 
-router.delete("/:id", (req, res) => {
-  res.send("Endpoint to delete an order not implemented yet");
-});
+router.delete("/:id", deleteOrder);
 
 export default router;
