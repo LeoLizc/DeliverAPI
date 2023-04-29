@@ -1,5 +1,6 @@
 
-import User from './user.model';
+import User, { Address } from './user.model';
+import Order from '../order/order.model';
 
 export async function getUsers(req, res) {
 
@@ -60,7 +61,40 @@ export async function login(req, res) {
 
 export async function patchUser(req, res) {
 
-  res.send('Endpoint to patch a user not implemented yet');
+  // res.send('Endpoint to update a user not implemented yet');
+  try {
+
+    const { id } = req.params;
+    const user = await User.findOne({ _id: id });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const { name, email, password, phone } = req.body;
+
+    if (name) {
+      user.name = name;
+    }
+
+    if (email) {
+      user.email = email;
+    }
+
+    if (password) {
+      user.password = password;
+    }
+
+    if (phone) {
+      user.phone = phone;
+    }
+
+    await user.save();
+    res.status(200).json(user);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
 
 }
 
@@ -96,6 +130,44 @@ export async function getAddresses(req, res) {
     }
     const addresses = user.addresses;
     res.status(200).json(addresses);
+
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+}
+
+export async function addUserAddress(req, res) {
+
+  try {
+
+    const { id } = req.params;
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const { address } = req.body;
+    const newAddress = await Address.create(address);
+
+    res.status(201).json(newAddress);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+
+}
+
+export async function getUserOrders(req, res) {
+
+  try {
+
+    const { id } = req.params;
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const orders = await Order.find({ client: id });
+    res.status(200).json(orders);
 
   } catch (err) {
     res.status(500).json(err);
