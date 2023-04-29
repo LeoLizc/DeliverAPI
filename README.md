@@ -3,6 +3,13 @@
 ## :clipboard: Project Description
 The "backend-first-project" repository is the first project of your university's backend course. It is a prototype of a basic CRUD (Create, Read, Update, Delete) service for a delivery service. The project has been developed using backend technologies and aims to provide a basic example of implementing a delivery service with functionalities for data creation, reading, updating, and deletion.
 
+Also, for this project I'm experimenting with different techniques, mainly Mongoose and a folder organization that I'm not used to.
+Among other things you can see:
+  - The creation and use of Mongoose plugins.
+  - The use of virtuals 
+  - The use of Mongoose middlewares
+  - Overwriting methods
+
 ## :wrench: Installation
 To install and set up the project locally, follow these steps:
 
