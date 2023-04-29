@@ -2,11 +2,13 @@ import { signup, login, deleteUser, getUsers, patchUser, getAddresses } from "./
 import { Router } from 'express';
 const router = Router();
 
+router.post('/signup', signup);//? SIGN UP?
+router.post('/login', login);
+router.get('/:id/addresses', getAddresses);
+
+
 // Endpoint GET /prueba
 router.get('/', getUsers);
-
-// Endpoint POST /prueba
-router.post('/signup', signup);//? SIGN UP?
 
 // Endpoint PATCH /prueba
 router.patch('/:id', patchUser);
@@ -18,9 +20,5 @@ router.delete('/:id', deleteUser);
 router.get('/:id/orders', (req, res) => {
   res.send("Endpoint to get all orders from a user not implemented yet");
 });
-
-// TODO THINK about LOGIN and SIGN UP
-router.post('/login', login);
-router.get('/:id/addresses', getAddresses);
 
 export default router;
