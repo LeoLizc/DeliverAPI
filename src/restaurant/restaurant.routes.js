@@ -4,7 +4,10 @@ import {
   createRestaurant,
   addProductsToRestaurant,
   getRestaurantProducts,
-  getManyRestaurants
+  getManyRestaurants,
+  getRestaurant,
+  updateRestaurant,
+  deleteRestaurant,
 } from "./restaurant.controller";
 
 const router = Router();
@@ -14,18 +17,9 @@ router.get("/", getManyRestaurants);
 router.get("/:id/orders", getRestaurantOrders);
 router.post("/:id/products", addProductsToRestaurant);
 router.get("/:id/products", getRestaurantProducts);
+router.get("/:id", getRestaurant);
 
-
-router.get("/:id", (req, res) => {//? THINK about products
-  res.send("Endpoint to get a restaurant not implemented yet");
-});
-
-router.patch("/:id", (req, res) => {
-  res.send("Endpoint to patch a restaurant not implemented yet");
-});
-
-router.delete("/:id", (req, res) => {
-  res.send("Endpoint to delete a restaurant not implemented yet");
-});
+router.patch("/:id", updateRestaurant);
+router.delete("/:id", deleteRestaurant);
 
 export default router;

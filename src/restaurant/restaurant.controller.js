@@ -70,7 +70,7 @@ export async function getRestaurantOrders(req, res) {
       }
       return true;
     });
-    return res.send(orders);
+    return res.json(orders);
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }
@@ -146,7 +146,88 @@ export async function getManyRestaurants(req, res) {
 
     restaurants.sort((a, b) => b.orders - a.orders);
 
-    return res.send(restaurants);
+    return res.json(restaurants);
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+}
+
+export async function getRestaurant(req, res) {
+  const restaurantId = req.params.id;
+
+  try {
+    const restaurant = await Restaurant.findById(restaurantId).populate("products");
+
+    if (!restaurant) {
+      return res.status(404).send({ message: "Restaurant not found" });
+    }
+
+    return res.json({ ...restaurant._doc, products: restaurant.products });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({ message: error.message });
+  }
+}
+
+export async function updateRestaurant(req, res) {
+  const restaurantId = req.params.id;
+  const { name, category, address, products } = req.body;
+
+  try {
+    const restaurant = await Restaurant.findById(restaurantId);
+
+    if (!restaurant) {
+      return res.status(404).send({ message: "Restaurant not found" });
+    }
+
+    if (name) {
+      restaurant.name = name;
+    }
+
+    if (category) {
+      restaurant.category = category;
+    }
+
+    if (address) {
+      restaurant.address = address;
+    }
+
+    if (products) {
+      if (!Array.isArray(products)) {
+        products = [products];
+      }
+
+      if (products.length > 0) {
+        const productsWithRestaurant = products.map(product => ({
+          ...product,
+          restaurant: restaurant._id,
+        }));
+
+        await Product.insertMany(productsWithRestaurant);
+      }
+    }
+
+    await restaurant.save();
+
+    return res.json(restaurant);
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+}
+
+export async function deleteRestaurant(req, res) {
+  const restaurantId = req.params.id;
+
+  try {
+    const restaurant = await Restaurant.findById(restaurantId);
+
+    if (!restaurant) {
+      return res.status(404).send({ message: "Restaurant not found" });
+    }
+
+    await restaurant.delete();
+
+    return res.send({ message: "Restaurant deleted successfully" });
   } catch (error) {
     return res.status(500).send({ message: error.message });
   }

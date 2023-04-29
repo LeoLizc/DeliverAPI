@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import Order from "../order/order.model";
+import Product from "../product/product.model";
 
 /**
  * @description - Restaurant Schema
@@ -28,12 +29,6 @@ const RestaurantSchema = new mongoose.Schema(
   {
     timestamps: true,
     virtuals: {
-      products: {
-        ref: "Product",
-        localField: "_id",
-        foreignField: "restaurant",
-        justOne: false,
-      },
       orders: {
         get() {
           return Order.find({ restaurant: this._id });
@@ -42,6 +37,13 @@ const RestaurantSchema = new mongoose.Schema(
     },
   }
 );
+
+RestaurantSchema.virtual("products", {
+  ref: "Product",
+  localField: "_id",
+  foreignField: "restaurant",
+  justOne: false,
+});
 
 export const Restaurant = mongoose.model("Restaurant", RestaurantSchema);
 export default Restaurant;
